@@ -21,6 +21,12 @@ project/assembly_name="StickSlap"
 
 folder_colors={
 "res://Assets/": "blue",
+"res://Scene/": "purple",
 "res://Scenes/": "purple",
 "res://Scripts/": "green"
 }
+
+[layer_names]
+
+2d_render/layer_1="1"
+2d_render/layer_2="2"
