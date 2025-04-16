@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://fwx6ysfe7wpe"]
+
+[ext_resource type="Texture2D" uid="uid://dn01va5nwwqvx" path="res://Assets/Sprites/Players/Ressources/head_super_fighter.png" id="1_w63l4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k7h5k"]
+height = 106.0
+
+[node name="Bullet" type="RigidBody2D"]
+
+[node name="HeadSuperFighter" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.928571, 0.143478)
+texture = ExtResource("1_w63l4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_k7h5k")
