@@ -30,3 +30,5 @@ folder_colors={
 
 2d_render/layer_1="1"
 2d_render/layer_2="2"
+2d_physics/layer_1="ground"
+2d_physics/layer_2="player"
