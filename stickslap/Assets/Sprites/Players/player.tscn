@@ -1,0 +1,135 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3ukokkyj03hs"]
+
+[ext_resource type="Texture2D" uid="uid://dn01va5nwwqvx" path="res://Assets/Sprites/Players/Ressources/head_super_fighter.png" id="1_6b2cb"]
+[ext_resource type="Texture2D" uid="uid://bosrqlgudicq2" path="res://Assets/Sprites/Players/Ressources/arm_super_fighter.png" id="2_uxs4k"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uxs4k"]
+radius = 57.4282
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2gs02"]
+radius = 5.0
+height = 284.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ltoqk"]
+radius = 6.0
+height = 232.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxs4k"]
+size = Vector2(883, 20)
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(540, -236)
+
+[node name="Head" type="RigidBody2D" parent="."]
+z_index = 2
+
+[node name="HeadSuperFighter" type="Sprite2D" parent="Head"]
+position = Vector2(0, 1)
+scale = Vector2(1, 0.986957)
+texture = ExtResource("1_6b2cb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
+shape = SubResource("CircleShape2D_uxs4k")
+
+[node name="Body" type="RigidBody2D" parent="."]
+
+[node name="BodySuperFighter" type="Sprite2D" parent="Body"]
+z_index = 1
+position = Vector2(1, 195)
+texture = ExtResource("2_uxs4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+position = Vector2(1, 197)
+shape = SubResource("CapsuleShape2D_2gs02")
+
+[node name="armRight" type="RigidBody2D" parent="."]
+
+[node name="armRightSuperFighter" type="Sprite2D" parent="armRight"]
+z_index = 1
+position = Vector2(118.789, 106)
+rotation = 1.5708
+scale = Vector2(1, 0.766257)
+texture = ExtResource("2_uxs4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="armRight"]
+position = Vector2(120.372, 106)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ltoqk")
+
+[node name="armLeft" type="RigidBody2D" parent="."]
+
+[node name="armLeftSuperFighter" type="Sprite2D" parent="armLeft"]
+z_index = 1
+position = Vector2(-116.211, 105)
+rotation = -1.5708
+scale = Vector2(1, 0.766257)
+texture = ExtResource("2_uxs4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="armLeft"]
+position = Vector2(-114.628, 105)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_ltoqk")
+
+[node name="legRight" type="RigidBody2D" parent="."]
+
+[node name="armLeftSuperFighter" type="Sprite2D" parent="legRight"]
+z_index = 1
+position = Vector2(92.3611, 406.784)
+rotation = 2.23402
+scale = Vector2(1, 0.766257)
+texture = ExtResource("2_uxs4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="legRight"]
+position = Vector2(93.9437, 406.784)
+rotation = 2.23402
+shape = SubResource("CapsuleShape2D_ltoqk")
+
+[node name="legLeft" type="RigidBody2D" parent="."]
+
+[node name="armRightSuperFighter" type="Sprite2D" parent="legLeft"]
+z_index = 1
+position = Vector2(-86.3084, 411.324)
+rotation = -2.28813
+scale = Vector2(1, 0.766257)
+texture = ExtResource("2_uxs4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="legLeft"]
+position = Vector2(-84.7258, 411.324)
+rotation = -2.28813
+shape = SubResource("CapsuleShape2D_ltoqk")
+
+[node name="Joints" type="Node2D" parent="."]
+
+[node name="JointHeadBody" type="PinJoint2D" parent="Joints"]
+z_index = 2
+position = Vector2(1, 56)
+node_a = NodePath("../../Head")
+node_b = NodePath("../../Body")
+
+[node name="JointBodyRightLeg" type="PinJoint2D" parent="Joints"]
+z_index = 2
+position = Vector2(4, 338)
+node_a = NodePath("../../Body")
+node_b = NodePath("../../legRight")
+
+[node name="JointBodyRightArm" type="PinJoint2D" parent="Joints"]
+z_index = 2
+position = Vector2(6, 105)
+node_a = NodePath("../../Body")
+node_b = NodePath("../../armRight")
+
+[node name="JointBodyLeftArm" type="PinJoint2D" parent="Joints"]
+z_index = 2
+position = Vector2(-4, 105)
+node_a = NodePath("../../Body")
+node_b = NodePath("../../armLeft")
+
+[node name="JointBodyLeftLeg" type="PinJoint2D" parent="Joints"]
+z_index = 2
+position = Vector2(-2, 338)
+node_a = NodePath("../../legLeft")
+node_b = NodePath("../../Body")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 791)
+shape = SubResource("RectangleShape2D_uxs4k")
