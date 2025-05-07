@@ -3,162 +3,187 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-    [Export]
-    public int Speed { get; set; } = 400;
+	[Export]
+	public int Speed { get; set; } = 400;
 
-    private float _jumpforce = 740f;
+	private float _jumpforce = 740f;
 
-    [Export] public Node2D Arm;
-    [Export] public float ArmLength = 20f;
-
-
-    /// <summary>
-    /// Propriété qui sert a faire la décelération quand on saute et qui prends _jumpforce comme base
-    /// </summary>
-    private float _currentJumpforce;
-
-    /// <summary>
-    /// Propriété pour savoir si le personnage est en train de sauter
-    /// </summary>
-    private bool _isJumping = false;
-
-    private bool _onChangingMap = false;
-    public double gravity { get; set; } = 9.81;
-    private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
-    public float Gravity { get => _gravity; set { _gravity = value; } }
-
-    private AnimatedSprite2D _sprite;
-
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        _sprite = (AnimatedSprite2D)GetChild(0);
-        _currentJumpforce = _jumpforce;
-
-        base._Ready();
-    }
-
-    public Vector2 GetInput()
-    {
-        return Input.GetVector("left", "right", "jump", "down");
-    }
+	[Export] public Node2D Arm;
+	[Export] public float ArmLength = 20f;
 
 
+	/// <summary>
+	/// Propriété qui sert a faire la décelération quand on saute et qui prends _jumpforce comme base
+	/// </summary>
+	private float _currentJumpforce;
 
-    public override void _PhysicsProcess(double delta)
-    {
-        Vector2 vector = Velocity;
-        Vector2 inputDirection = GetInput();
+	/// <summary>
+	/// Propriété pour savoir si le personnage est en train de sauter
+	/// </summary>
+	private bool _isJumping = false;
 
-        float tmp = 0;
+	private bool _onChangingMap = false;
+	public double gravity { get; set; } = 9.81;
+	private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	public float Gravity { get => _gravity; set { _gravity = value; } }
 
-        if (!IsOnFloor() && Velocity.Y >= 0)
-        {
-            _currentJumpforce = _jumpforce;
-            _isJumping = false;
-            tmp = (Gravity * (float)delta);
-            vector.Y = tmp * 14;
-        }
-        else if (IsOnFloor() && Input.IsActionJustPressed("jump") || _isJumping)
-        {
-            vector.Y = _currentJumpforce * -1;
-            _currentJumpforce -= _jumpforce * 5 / 100;
-            _isJumping = true;
-        }
+	private AnimatedSprite2D _sprite;
 
-        //EN TESTE
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+		_sprite = (AnimatedSprite2D)GetChild(0);
+		_currentJumpforce = _jumpforce;
 
-        //var parent = this.GetParent();
-        //if (parent is GameManager gameManager)
-        //{
-        //    if (!_onChangingMap)
-        //    {
-        //        int result = gameManager.IsPlayerBorderMap(this.Position);
-        //        GD.Print(result);
-        //        if (result == 1)
-        //        {
-        //            //GD.Print(gameManager.sizeMap.X);
+		_sprite.Play("default");
 
-        //            gameManager.LoadNextChunk();
-        //            gameManager.SpawnPlayerOnOrigin();
+		base._Ready();
+	}
 
-        //        }
-        //        else if (result == -1)//si reviens en arriere
-        //        {
-
-        //        }
-        //        //_onChangingMap = true;
-        //    }
-
-
-
-        //}
+	public Vector2 GetInput()
+	{
+		return Input.GetVector("left", "right", "jump", "down");
+	}
 
 
 
 
-        vector.X = inputDirection.X * Speed;
-        Velocity = vector;
+
+	public override void _PhysicsProcess(double delta)
+	{
+		Vector2 vector = Velocity;
+		Vector2 inputDirection = GetInput();
+
+		float tmp = 0;
+
+		if (!IsOnFloor() && Velocity.Y >= 0)
+		{
+			_currentJumpforce = _jumpforce;
+			_isJumping = false;
+			tmp = (Gravity * (float)delta);
+			vector.Y = tmp * 14;
+		}
+		else if (IsOnFloor() && Input.IsActionJustPressed("jump") || _isJumping)
+		{
+			vector.Y = _currentJumpforce * -1;
+			_currentJumpforce -= _jumpforce * 5 / 100;
+			_isJumping = true;
+		}
+		if (Input.IsActionJustPressed("leftClick"))
+		{	
+			_sprite.Play("Punch");
+		}
+		//EN TESTE
+
+		//var parent = this.GetParent();
+		//if (parent is GameManager gameManager)
+		//{
+		//    if (!_onChangingMap)
+		//    {
+		//        int result = gameManager.IsPlayerBorderMap(this.Position);
+		//        GD.Print(result);
+		//        if (result == 1)
+		//        {
+		//            //GD.Print(gameManager.sizeMap.X);
+
+		//            gameManager.LoadNextChunk();
+		//            gameManager.SpawnPlayerOnOrigin();
+
+		//        }
+		//        else if (result == -1)//si reviens en arriere
+		//        {
+
+		//        }
+		//        //_onChangingMap = true;
+		//    }
 
 
-        //ChangeAnimation();
 
-        MoveAndSlide();
-
-
-
-    }
-
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-    {
-    }
-
-    public void ChangeAnimation()
-    {
+		//}
 
 
 
-        float VelocityX = Velocity.X;
-        float VelocityY = Velocity.Y;
+
+		vector.X = inputDirection.X * Speed;
+		Velocity = vector;
+
+
+		//ChangeAnimation();
+
+		MoveAndSlide();
+
+		//Punch();
+
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
+
+	public void ChangeAnimation()
+	{
 
 
 
-        switch (true)
-        {
-            case true when VelocityY > 0:
-
-                //if (_sprite.Animation == "Fall" || _sprite.Animation == "Falling")
-                //{
-                //    if(_sprite.Frame == _sprite.SpriteFrames.GetFrameCount("Fall"))
-                //        _sprite.Play("Falling");
-                //    break;
-                //}
-
-                //_sprite.Play("Falling");
-
-                if (VelocityX > 0)
-                    _sprite.FlipH = false;
-                else if (VelocityX < 0)
-                    _sprite.FlipH = true;
-                break;
-
-            case true when (VelocityX > 0 && VelocityY == 0):
-                //_sprite.Play("Walk");
-                _sprite.FlipH = false;
-                break;
-
-            case true when (VelocityX < 0 && VelocityY == 0):
-                //_sprite.Play("Walk");
-                _sprite.FlipH = true;
-                break;
-
-            default:
-                //_sprite.Play("Idle");
-                break;
-        }
-
-    }
+		float VelocityX = Velocity.X;
+		float VelocityY = Velocity.Y;
 
 
+
+		switch (true)
+		{
+			case true when VelocityY > 0:
+
+				//if (_sprite.Animation == "Fall" || _sprite.Animation == "Falling")
+				//{
+				//    if(_sprite.Frame == _sprite.SpriteFrames.GetFrameCount("Fall"))
+				//        _sprite.Play("Falling");
+				//    break;
+				//}
+
+				//_sprite.Play("Falling");
+
+				if (VelocityX > 0)
+					_sprite.FlipH = false;
+				else if (VelocityX < 0)
+					_sprite.FlipH = true;
+				break;
+
+			case true when (VelocityX > 0 && VelocityY == 0):
+				//_sprite.Play("Walk");
+				_sprite.FlipH = false;
+				break;
+
+			case true when (VelocityX < 0 && VelocityY == 0):
+				//_sprite.Play("Walk");
+				_sprite.FlipH = true;
+				break;
+
+			default:
+				//_sprite.Play("Idle");
+				break;
+		}
+
+	}
+
+	//public void Punch()
+	//{
+	//	if(Input.IsActionJustPressed("leftClick"))
+	//	{
+	//		if (Arm is Punch punch)
+	//		{
+	//			_sprite.Play("Punch");
+	//		}
+	//	}
+	//}
+
+	public bool DetectArms()
+	{
+		if (Arm is Weapon weapon && weapon.GetType() != typeof(Punch))
+		{
+			return true;
+		}
+		return false;
+	}
 }

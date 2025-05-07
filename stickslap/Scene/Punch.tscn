@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dssm6c6c2ikjo"]
+
+[ext_resource type="Texture2D" uid="uid://c3641fl45bwne" path="res://Assets/Sprites/Punch_Sprite/Punch.jpg" id="1_f6ism"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wi4qp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_f6ism")
+}],
+"loop": true,
+"name": &"Punch",
+"speed": 5.0
+}]
+
+[node name="Punch" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wi4qp")
+animation = &"Punch"

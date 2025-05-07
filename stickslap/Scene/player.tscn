@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3ukokkyj03hs"]
+[gd_scene load_steps=7 format=3 uid="uid://c3ukokkyj03hs"]
 
 [ext_resource type="Texture2D" uid="uid://4vs38hs71ckq" path="res://Assets/Sprites/Players/Ressources/SuperFighter.png" id="1_kelma"]
 [ext_resource type="Script" uid="uid://dup8k13gka0m" path="res://Scripte/Player.cs" id="1_y8w33"]
+[ext_resource type="Texture2D" uid="uid://c3641fl45bwne" path="res://Assets/Sprites/Punch_Sprite/Punch.jpg" id="2_r6jsd"]
 [ext_resource type="PackedScene" uid="uid://cyl3n8p1ifft3" path="res://Scene/Glock.tscn" id="3_xa75v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxs4k"]
@@ -11,9 +12,17 @@ size = Vector2(47, 74)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_kelma")
+"texture": ExtResource("2_r6jsd")
 }],
 "loop": true,
+"name": &"Punch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kelma")
+}],
+"loop": false,
 "name": &"default",
 "speed": 5.0
 }]
