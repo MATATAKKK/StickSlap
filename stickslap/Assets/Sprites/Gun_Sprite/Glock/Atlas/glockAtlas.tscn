@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsh627xpi42qm"]
+
+[ext_resource type="Script" uid="uid://c8a1oj7i40jrk" path="res://addons/sprite_cutter/AtlasScene.gd" id="1_o6dvq"]
+[ext_resource type="Texture2D" uid="uid://k4fispe8udf3" path="res://Assets/Sprites/Gun_Sprite/Glock/Atlas/[FULL]PistolV1.01.png" id="2_eewee"]
+
+[node name="GlockAtlas" type="Node"]
+script = ExtResource("1_o6dvq")
+destination_path = "res://Assets/Sprites/Gun_Sprite/Glock/Animations"
+metadata/_custom_type_script = "uid://c8a1oj7i40jrk"
+
+[node name="frameGlock01" type="Sprite2D" parent="."]
+position = Vector2(411, 284)
+texture = ExtResource("2_eewee")
+region_enabled = true
+region_rect = Rect2(3, 10, 28, 18)
+
+[node name="frameGlock02" type="Sprite2D" parent="."]
+position = Vector2(822, 568)
+texture = ExtResource("2_eewee")
+region_enabled = true
+region_rect = Rect2(67, 10, 33, 18)
+
+[node name="frameGlock03" type="Sprite2D" parent="."]
+position = Vector2(1644, 1136)
+texture = ExtResource("2_eewee")
+region_enabled = true
+region_rect = Rect2(131, 8, 35, 20)
+
+[node name="frameGlock04" type="Sprite2D" parent="."]
+position = Vector2(3288, 2272)
+texture = ExtResource("2_eewee")
+region_enabled = true
+region_rect = Rect2(194, 10, 39, 18)
+
+[node name="frameGlock05" type="Sprite2D" parent="."]
+position = Vector2(6576, 4544)
+texture = ExtResource("2_eewee")
+region_enabled = true
+region_rect = Rect2(257, 8, 42, 20)
+
+[node name="frameGlock06" type="Sprite2D" parent="."]
+position = Vector2(13152, 9088)
+texture = ExtResource("2_eewee")
+region_enabled = true
+region_rect = Rect2(320, 6, 47, 22)
+
+[node name="frameGlock07" type="Sprite2D" parent="."]
+position = Vector2(26304, 18176)
+texture = ExtResource("2_eewee")
+region_enabled = true
+region_rect = Rect2(386, 4, 47, 24)
+
+[node name="frameGlock08" type="Sprite2D" parent="."]
+position = Vector2(52608, 36352)
+texture = ExtResource("2_eewee")
+region_enabled = true
+region_rect = Rect2(451, 3, 52, 25)
+
+[node name="frameGlock09" type="Sprite2D" parent="."]
+position = Vector2(105216, 72704)
+texture = ExtResource("2_eewee")
+region_enabled = true
+region_rect = Rect2(513, 3, 60, 25)
+
+[node name="frameGlock10" type="Sprite2D" parent="."]
+position = Vector2(210433, 145408)
+texture = ExtResource("2_eewee")
+region_enabled = true
+region_rect = Rect2(577, 6, 65, 23)
+
+[node name="frameGlock11" type="Sprite2D" parent="."]
+position = Vector2(420866, 290816)
+texture = ExtResource("2_eewee")
+region_enabled = true
+region_rect = Rect2(643, 10, 62, 18)
+
+[node name="frameGlock12" type="Sprite2D" parent="."]
+position = Vector2(841732, 581632)
+texture = ExtResource("2_eewee")
+region_enabled = true
+region_rect = Rect2(707, 10, 28, 18)

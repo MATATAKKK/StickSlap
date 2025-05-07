@@ -1,0 +1,71 @@
+[gd_scene load_steps=16 format=3 uid="uid://cyl3n8p1ifft3"]
+
+[ext_resource type="Texture2D" uid="uid://c0o7y37xd0d4g" path="res://Assets/Sprites/Gun_Sprite/Glock/Animations/frameGlock01.atlastex" id="1_v6wrs"]
+[ext_resource type="Script" uid="uid://c1cund0j5iaou" path="res://Scripte/Glock.cs" id="1_xoibi"]
+[ext_resource type="PackedScene" uid="uid://fwx6ysfe7wpe" path="res://Scene/bullet.tscn" id="2_dd6o0"]
+[ext_resource type="Texture2D" uid="uid://cb02lhnp2j4yt" path="res://Assets/Sprites/Gun_Sprite/Glock/Animations/frameGlock02.atlastex" id="2_pne5n"]
+[ext_resource type="Texture2D" uid="uid://blugpdaiajrpq" path="res://Assets/Sprites/Gun_Sprite/Glock/Animations/frameGlock03.atlastex" id="3_xoibi"]
+[ext_resource type="Texture2D" uid="uid://cgdo2g6tbgalc" path="res://Assets/Sprites/Gun_Sprite/Glock/Animations/frameGlock04.atlastex" id="4_nb2f2"]
+[ext_resource type="Texture2D" uid="uid://7t6p771d51gg" path="res://Assets/Sprites/Gun_Sprite/Glock/Animations/frameGlock05.atlastex" id="5_uqto7"]
+[ext_resource type="Texture2D" uid="uid://bqfsqvfupp6uv" path="res://Assets/Sprites/Gun_Sprite/Glock/Animations/frameGlock06.atlastex" id="6_d0xc6"]
+[ext_resource type="Texture2D" uid="uid://b5ok6colhpgn8" path="res://Assets/Sprites/Gun_Sprite/Glock/Animations/frameGlock07.atlastex" id="7_hpa23"]
+[ext_resource type="Texture2D" uid="uid://bey6thuhc7x3h" path="res://Assets/Sprites/Gun_Sprite/Glock/Animations/frameGlock08.atlastex" id="8_dkgdk"]
+[ext_resource type="Texture2D" uid="uid://b5ph0daqk6xsy" path="res://Assets/Sprites/Gun_Sprite/Glock/Animations/frameGlock09.atlastex" id="9_m2irv"]
+[ext_resource type="Texture2D" uid="uid://fhc8albk6umi" path="res://Assets/Sprites/Gun_Sprite/Glock/Animations/frameGlock10.atlastex" id="10_vhpqj"]
+[ext_resource type="Texture2D" uid="uid://cgcawe0dngovw" path="res://Assets/Sprites/Gun_Sprite/Glock/Animations/frameGlock11.atlastex" id="11_f7j81"]
+[ext_resource type="Texture2D" uid="uid://bwunv3ir7noxy" path="res://Assets/Sprites/Gun_Sprite/Glock/Animations/frameGlock12.atlastex" id="12_ib8jj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qtac1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_v6wrs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_pne5n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_xoibi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nb2f2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_uqto7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_d0xc6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_hpa23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_dkgdk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_m2irv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_vhpqj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_f7j81")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ib8jj")
+}],
+"loop": false,
+"name": &"Shoot",
+"speed": 20.0
+}]
+
+[node name="Glock" type="Node2D"]
+script = ExtResource("1_xoibi")
+bulletTcn = ExtResource("2_dd6o0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_qtac1")
+animation = &"Shoot"
+frame = 11
+frame_progress = 1.0

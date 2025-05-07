@@ -101,7 +101,7 @@ public partial class Player : CharacterBody2D
         Velocity = vector;
 
 
-        ChangeAnimation();
+        //ChangeAnimation();
 
         MoveAndSlide();
 
@@ -160,5 +160,5 @@ public partial class Player : CharacterBody2D
 
     }
 
-    
+
 }
