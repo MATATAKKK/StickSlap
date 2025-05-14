@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl6sy6rl8iskw"]
+
+[ext_resource type="Texture2D" uid="uid://eqjmlpr6f633" path="res://Assets/Sprites/Gun_Sprite/Normal/Bazooka - M20 [192x32].png" id="1_yltro"]
+
+[node name="Weapons" type="Node2D"]
+
+[node name="Bazooka-M20[192x32]" type="Sprite2D" parent="."]
+position = Vector2(2, 0)
+texture = ExtResource("1_yltro")

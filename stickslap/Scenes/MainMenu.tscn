@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=3 uid="uid://duj1wq3pj7qd1"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_bnhvo"]
+script/source = "using Godot;
+using System;
+
+public partial class MainMenu : Control
+{
+	// Chemins vers vos scènes (à adapter)
+	private const string GameScenePath = \"res://Scenes/(CHEMIN VERS LA SCèNE DE JEU).tscn\";
+	private const string OptionsScenePath = \"res://Scenes/Options.tscn\";
+
+	public override void _Ready()
+	{
+		// Récupération des boutons et connexion des signaux
+		GetNode<Button>(\"VBoxContainer/btnStartGame\").Pressed += OnPlayPressed;
+		GetNode<Button>(\"VBoxContainer/btnOptions\").Pressed += OnOptionsPressed;
+		GetNode<Button>(\"VBoxContainer/btnQuitGame\").Pressed += OnQuitPressed;
+	}
+
+	private void OnPlayPressed()
+	{
+		// Chargement de la scène de jeu
+		GetTree().ChangeScene(GameScenePath);
+	}
+
+	private void OnOptionsPressed()
+	{
+		// Chargement de la scène d’options
+		GetTree().ChangeScene(OptionsScenePath);
+	}
+
+	private void OnQuitPressed()
+	{
+		// Quitter l’application
+		GetTree().Quit();
+	}
+}
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bnhvo"]
+bg_color = Color(1, 0.341657, 0.290893, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("CSharpScript_bnhvo")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 1155.0
+offset_bottom = 649.0
+
+[node name="btnStartGame" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_styles/focus = SubResource("StyleBoxFlat_bnhvo")
+text = "Start Game"
+
+[node name="btnOptions" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+action_mode = 0
+text = "Options"
