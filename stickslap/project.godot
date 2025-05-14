@@ -26,8 +26,7 @@ enabled=PackedStringArray("res://addons/sprite_cutter/plugin.cfg")
 folder_colors={
 "res://Assets/": "blue",
 "res://Scene/": "purple",
-"res://Scenes/": "purple",
-"res://Scripts/": "green"
+"res://Scenes/": "purple"
 }
 
 [input]
