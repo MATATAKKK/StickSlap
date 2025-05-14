@@ -15,9 +15,9 @@ public abstract partial class Weapon : Node2D
 		fireRate = 1/bps;
 		base._Ready();
 	}
-   
 
 
+	public abstract void Use();
 	
    
 

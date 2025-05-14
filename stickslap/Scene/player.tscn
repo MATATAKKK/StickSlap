@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3ukokkyj03hs"]
+[gd_scene load_steps=6 format=3 uid="uid://c3ukokkyj03hs"]
 
 [ext_resource type="Texture2D" uid="uid://4vs38hs71ckq" path="res://Assets/Sprites/Players/Ressources/SuperFighter.png" id="1_kelma"]
 [ext_resource type="Script" uid="uid://dup8k13gka0m" path="res://Scripte/Player.cs" id="1_y8w33"]
 [ext_resource type="Texture2D" uid="uid://c3641fl45bwne" path="res://Assets/Sprites/Punch_Sprite/Punch.jpg" id="2_r6jsd"]
-[ext_resource type="PackedScene" uid="uid://cyl3n8p1ifft3" path="res://Scene/Glock.tscn" id="3_xa75v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uxs4k"]
 size = Vector2(47, 74)
@@ -40,5 +39,6 @@ position = Vector2(-0.150002, 0.309005)
 scale = Vector2(0.1, 0.133)
 sprite_frames = SubResource("SpriteFrames_y8w33")
 
-[node name="Glock" parent="." instance=ExtResource("3_xa75v")]
-position = Vector2(29, -19)
+[node name="PunchTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true

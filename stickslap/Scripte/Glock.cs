@@ -36,4 +36,10 @@ public partial class Glock : Weapon
 			timeUntilFire += (float)delta;
 		}
 	}
+
+    public override void Use()
+    {
+        // L'usage de l'arme consiste à effectuer l'action de tir
+        GD.Print("Gun used! Shoot!");
+    }
 }

@@ -1,4 +1,5 @@
 using Godot;
+using Godot.NativeInterop;
 using System;
 
 public partial class Player : CharacterBody2D
@@ -29,18 +30,30 @@ public partial class Player : CharacterBody2D
 
 	private AnimatedSprite2D _sprite;
 
+    private Weapon _currentWeapon = null;
+
+    private Timer _punchTimer;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_sprite = (AnimatedSprite2D)GetChild(0);
-		_currentJumpforce = _jumpforce;
+		_sprite = (AnimatedSprite2D)GetChild(1);
+        _punchTimer = GetNode<Timer>("PunchTimer");
+
+        _punchTimer.Timeout += OnPunchTimerTimeout;
+        _currentJumpforce = _jumpforce;
 
 		_sprite.Play("default");
 
 		base._Ready();
 	}
 
-	public Vector2 GetInput()
+    private void OnPunchTimerTimeout()
+    {
+        _sprite.Play("default");
+    }
+
+    public Vector2 GetInput()
 	{
 		return Input.GetVector("left", "right", "jump", "down");
 	}
@@ -69,42 +82,51 @@ public partial class Player : CharacterBody2D
 			_currentJumpforce -= _jumpforce * 5 / 100;
 			_isJumping = true;
 		}
-		if (Input.IsActionJustPressed("leftClick"))
+		if (Input.IsKeyPressed(Key.F))
 		{	
-			_sprite.Play("Punch");
-		}
-		//EN TESTE
+			if(_currentWeapon != null)
+			{
+				_currentWeapon.Use();
+			}
+			else
+			{
+				_sprite.Play("Punch");
+				_punchTimer.Start();
+			}
+        }
 
-		//var parent = this.GetParent();
-		//if (parent is GameManager gameManager)
-		//{
-		//    if (!_onChangingMap)
-		//    {
-		//        int result = gameManager.IsPlayerBorderMap(this.Position);
-		//        GD.Print(result);
-		//        if (result == 1)
-		//        {
-		//            //GD.Print(gameManager.sizeMap.X);
+        //EN TESTE
 
-		//            gameManager.LoadNextChunk();
-		//            gameManager.SpawnPlayerOnOrigin();
+        //var parent = this.GetParent();
+        //if (parent is GameManager gameManager)
+        //{
+        //    if (!_onChangingMap)
+        //    {
+        //        int result = gameManager.IsPlayerBorderMap(this.Position);
+        //        GD.Print(result);
+        //        if (result == 1)
+        //        {
+        //            //GD.Print(gameManager.sizeMap.X);
 
-		//        }
-		//        else if (result == -1)//si reviens en arriere
-		//        {
+        //            gameManager.LoadNextChunk();
+        //            gameManager.SpawnPlayerOnOrigin();
 
-		//        }
-		//        //_onChangingMap = true;
-		//    }
+        //        }
+        //        else if (result == -1)//si reviens en arriere
+        //        {
 
-
-
-		//}
+        //        }
+        //        //_onChangingMap = true;
+        //    }
 
 
 
+        //}
 
-		vector.X = inputDirection.X * Speed;
+
+
+
+        vector.X = inputDirection.X * Speed;
 		Velocity = vector;
 
 
@@ -115,6 +137,8 @@ public partial class Player : CharacterBody2D
 		//Punch();
 
 	}
+
+
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -167,23 +191,8 @@ public partial class Player : CharacterBody2D
 
 	}
 
-	//public void Punch()
-	//{
-	//	if(Input.IsActionJustPressed("leftClick"))
-	//	{
-	//		if (Arm is Punch punch)
-	//		{
-	//			_sprite.Play("Punch");
-	//		}
-	//	}
-	//}
-
-	public bool DetectArms()
-	{
-		if (Arm is Weapon weapon && weapon.GetType() != typeof(Punch))
-		{
-			return true;
-		}
-		return false;
-	}
+    public void EquipWeapon(Weapon weapon)
+    {
+        _currentWeapon = weapon;
+    }
 }
