@@ -1,32 +1,46 @@
 using Godot;
+using Godot.NativeInterop;
 using System;
 
 public partial class Player : CharacterBody2D
 {
-    [Export]
-    public int Speed { get; set; } = 400;
+	[Export]
+	public int Speed { get; set; } = 400;
 
-    private float _jumpforce = 740f;
+	private float _jumpforce = 740f;
 
-    [Export] public Node2D Arm;
-    [Export] public float ArmLength = 20f;
+	[Export] public Node2D Arm;
+	[Export] public float ArmLength = 20f;
 
 
-    /// <summary>
-    /// Propriété qui sert a faire la décelération quand on saute et qui prends _jumpforce comme base
-    /// </summary>
-    private float _currentJumpforce;
+	/// <summary>
+	/// Propriété qui sert a faire la décelération quand on saute et qui prends _jumpforce comme base
+	/// </summary>
+	private float _currentJumpforce;
 
-    /// <summary>
-    /// Propriété pour savoir si le personnage est en train de sauter
-    /// </summary>
-    private bool _isJumping = false;
+	/// <summary>
+	/// Propriété pour savoir si le personnage est en train de sauter
+	/// </summary>
+	private bool _isJumping = false;
 
-    private bool _onChangingMap = false;
-    public double gravity { get; set; } = 9.81;
-    private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
-    public float Gravity { get => _gravity; set { _gravity = value; } }
+	private bool _onChangingMap = false;
+	public double gravity { get; set; } = 9.81;
+	private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	public float Gravity { get => _gravity; set { _gravity = value; } }
 
+	private AnimatedSprite2D _sprite;
+
+    private Weapon _currentWeapon = null;
+
+    private Timer _punchTimer;
+
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+		_sprite = (AnimatedSprite2D)GetChild(1);
+        _punchTimer = GetNode<Timer>("PunchTimer");
+
+        _punchTimer.Timeout += OnPunchTimerTimeout;
     private AnimatedSprite2D _sprite;
     private AnimatedSprite2D _weapon;
 
@@ -38,35 +52,56 @@ public partial class Player : CharacterBody2D
         _weapon = (AnimatedSprite2D)_sprite.GetChild(0).GetChild(0);
         //_bullet = (Node2D)_sprite.GetChild(1);
 
-        base._Ready();
+		_sprite.Play("default");
+
+		base._Ready();
+	}
+
+    private void OnPunchTimerTimeout()
+    {
+        _sprite.Play("default");
     }
 
     public Vector2 GetInput()
-    {
-        return Input.GetVector("left", "right", "jump", "down");
-    }
+	{
+		return Input.GetVector("left", "right", "jump", "down");
+	}
 
 
 
-    public override void _PhysicsProcess(double delta)
-    {
-        Vector2 vector = Velocity;
-        Vector2 inputDirection = GetInput();
 
-        float tmp = 0;
 
-        if (!IsOnFloor() && Velocity.Y >= 0)
-        {
-            _currentJumpforce = _jumpforce;
-            _isJumping = false;
-            tmp = (Gravity * (float)delta);
-            vector.Y = tmp * 14;
-        }
-        else if (IsOnFloor() && Input.IsActionJustPressed("jump") || _isJumping)
-        {
-            vector.Y = _currentJumpforce * -1;
-            _currentJumpforce -= _jumpforce * 5 / 100;
-            _isJumping = true;
+	public override void _PhysicsProcess(double delta)
+	{
+		Vector2 vector = Velocity;
+		Vector2 inputDirection = GetInput();
+
+		float tmp = 0;
+
+		if (!IsOnFloor() && Velocity.Y >= 0)
+		{
+			_currentJumpforce = _jumpforce;
+			_isJumping = false;
+			tmp = (Gravity * (float)delta);
+			vector.Y = tmp * 14;
+		}
+		else if (IsOnFloor() && Input.IsActionJustPressed("jump") || _isJumping)
+		{
+			vector.Y = _currentJumpforce * -1;
+			_currentJumpforce -= _jumpforce * 5 / 100;
+			_isJumping = true;
+		}
+		if (Input.IsKeyPressed(Key.F))
+		{	
+			if(_currentWeapon != null)
+			{
+				_currentWeapon.Use();
+			}
+			else
+			{
+				_sprite.Play("Punch");
+				_punchTimer.Start();
+			}
         }
 
         //EN TESTE
@@ -101,20 +136,73 @@ public partial class Player : CharacterBody2D
 
 
         vector.X = inputDirection.X * Speed;
-        Velocity = vector;
+		Velocity = vector;
 
 
         ChangeAnimation();
 
-        MoveAndSlide();
+		MoveAndSlide();
+
+		//Punch();
+
+	}
 
 
 
-    }
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+	}
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
+	public void ChangeAnimation()
+	{
+
+
+
+		float VelocityX = Velocity.X;
+		float VelocityY = Velocity.Y;
+
+
+
+		switch (true)
+		{
+			case true when VelocityY > 0:
+
+				//if (_sprite.Animation == "Fall" || _sprite.Animation == "Falling")
+				//{
+				//    if(_sprite.Frame == _sprite.SpriteFrames.GetFrameCount("Fall"))
+				//        _sprite.Play("Falling");
+				//    break;
+				//}
+
+				//_sprite.Play("Falling");
+
+				if (VelocityX > 0)
+					_sprite.FlipH = false;
+				else if (VelocityX < 0)
+					_sprite.FlipH = true;
+				break;
+
+			case true when (VelocityX > 0 && VelocityY == 0):
+				//_sprite.Play("Walk");
+				_sprite.FlipH = false;
+				break;
+
+			case true when (VelocityX < 0 && VelocityY == 0):
+				//_sprite.Play("Walk");
+				_sprite.FlipH = true;
+				break;
+
+			default:
+				//_sprite.Play("Idle");
+				break;
+		}
+
+	}
+
+    public void EquipWeapon(Weapon weapon)
     {
+        _currentWeapon = weapon;
     }
 
     public void ChangeAnimation()
