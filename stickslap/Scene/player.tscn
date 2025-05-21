@@ -129,3 +129,9 @@ animation = &"Idle"
 [node name="Glock" parent="AnimatedSprite2D" instance=ExtResource("3_xa75v")]
 position = Vector2(155.75, -8.68047)
 scale = Vector2(5, 3.7594)
+
+[node name="PunchTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="timeout" from="PunchTimer" to="." method="_on_punch_timer_timeout"]

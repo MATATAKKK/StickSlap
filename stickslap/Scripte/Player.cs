@@ -8,6 +8,10 @@ public partial class Player : CharacterBody2D
 
     private float _jumpforce = 740f;
 
+    private Weapon _currentWeapon = null;
+
+    private Timer _punchTimer;
+
     [Export] public Node2D Arm;
     [Export] public float ArmLength = 20f;
 
@@ -38,7 +42,18 @@ public partial class Player : CharacterBody2D
         _weapon = (AnimatedSprite2D)_sprite.GetChild(0).GetChild(0);
         //_bullet = (Node2D)_sprite.GetChild(1);
 
+        _sprite = (AnimatedSprite2D)GetChild(1);
+        _punchTimer = GetNode<Timer>("PunchTimer");
+
+        _punchTimer.Timeout += OnPunchTimerTimeout;
+        _currentJumpforce = _jumpforce;
+
         base._Ready();
+    }
+
+    private void OnPunchTimerTimeout()
+    {
+        _sprite.Play("default");
     }
 
     public Vector2 GetInput()
@@ -68,6 +83,21 @@ public partial class Player : CharacterBody2D
             _currentJumpforce -= _jumpforce * 5 / 100;
             _isJumping = true;
         }
+        if (Input.IsKeyPressed(Key.F))
+        {
+
+            //EN TESTE
+            if (_currentWeapon != null)
+            {
+                //_currentWeapon.Use();
+            }
+            else
+            {
+                _sprite.Play("Punch");
+                _punchTimer.Start();
+            }
+        }
+
 
         //EN TESTE
 
