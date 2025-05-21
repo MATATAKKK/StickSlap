@@ -107,14 +107,6 @@ animations = [{
 "texture": null
 }],
 "loop": true,
-"name": &"Punch",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("1_kelma")
-}],
-"loop": false,
 "name": &"default",
 "speed": 5.0
 }]
