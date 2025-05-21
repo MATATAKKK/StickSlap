@@ -1,10 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://xgp70y1glt34"]
+[gd_scene load_steps=6 format=3 uid="uid://xgp70y1glt34"]
 
 [ext_resource type="Script" uid="uid://dup8k13gka0m" path="res://Scripte/Player.cs" id="1_5jcwc"]
-[ext_resource type="Texture2D" uid="uid://dn01va5nwwqvx" path="res://Assets/Sprites/Players/Ressources/head_super_fighter.png" id="2_63ie8"]
-[ext_resource type="Texture2D" uid="uid://bosrqlgudicq2" path="res://Assets/Sprites/Players/Ressources/arm_super_fighter.png" id="3_cshsv"]
-[ext_resource type="Script" uid="uid://cke5t1bh04xfm" path="res://Scripte/Weapon.cs" id="4_7ufdf"]
-[ext_resource type="PackedScene" uid="uid://fwx6ysfe7wpe" path="res://Scene/bullet.tscn" id="5_f6njt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_uxs4k"]
 radius = 57.4282
@@ -32,7 +28,6 @@ z_index = 2
 [node name="HeadSuperFighter" type="Sprite2D" parent="Head"]
 position = Vector2(0, 1)
 scale = Vector2(1, 0.986957)
-texture = ExtResource("2_63ie8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
 shape = SubResource("CircleShape2D_uxs4k")
@@ -43,7 +38,6 @@ visible = false
 [node name="BodySuperFighter" type="Sprite2D" parent="Body"]
 z_index = 1
 position = Vector2(1, 195)
-texture = ExtResource("3_cshsv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
 position = Vector2(1, 197)
@@ -57,7 +51,6 @@ z_index = 1
 position = Vector2(118.789, 106)
 rotation = 1.5708
 scale = Vector2(1, 0.766257)
-texture = ExtResource("3_cshsv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="armRight"]
 position = Vector2(120.372, 106)
@@ -72,7 +65,6 @@ z_index = 1
 position = Vector2(-116.211, 105)
 rotation = -1.5708
 scale = Vector2(1, 0.766257)
-texture = ExtResource("3_cshsv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="armLeft"]
 position = Vector2(-114.628, 105)
@@ -87,7 +79,6 @@ z_index = 1
 position = Vector2(92.3611, 406.784)
 rotation = 2.23402
 scale = Vector2(1, 0.766257)
-texture = ExtResource("3_cshsv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="legRight"]
 position = Vector2(93.9437, 406.784)
@@ -102,7 +93,6 @@ z_index = 1
 position = Vector2(-86.3084, 411.324)
 rotation = -2.28813
 scale = Vector2(1, 0.766257)
-texture = ExtResource("3_cshsv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="legLeft"]
 position = Vector2(-84.7258, 411.324)
@@ -150,5 +140,3 @@ shape = SubResource("RectangleShape2D_uxs4k")
 [node name="Gun" type="Node2D" parent="."]
 visible = false
 position = Vector2(235, 107)
-script = ExtResource("4_7ufdf")
-bulletTcn = ExtResource("5_f6njt")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dn01va5nwwqvx"
-path="res://.godot/imported/head_super_fighter.png-c038e4553833d0b2930bf77676c4af8f.ctex"
+uid="uid://dab6umvkyvxh5"
+path="res://.godot/imported/run_0007.png-6a4e657ae103c038be7b2b0ad37a5d6b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Players/Ressources/head_super_fighter.png"
-dest_files=["res://.godot/imported/head_super_fighter.png-c038e4553833d0b2930bf77676c4af8f.ctex"]
+source_file="res://Assets/Sprites/Players/Ressources/run_0007.png"
+dest_files=["res://.godot/imported/run_0007.png-6a4e657ae103c038be7b2b0ad37a5d6b.ctex"]
 
 [params]
 
