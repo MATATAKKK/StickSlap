@@ -28,12 +28,15 @@ public partial class Player : CharacterBody2D
     public float Gravity { get => _gravity; set { _gravity = value; } }
 
     private AnimatedSprite2D _sprite;
+    private AnimatedSprite2D _weapon;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        _sprite = (AnimatedSprite2D)GetChild(0);
+        _sprite = (AnimatedSprite2D)GetChild(1);
         _currentJumpforce = _jumpforce;
+        _weapon = (AnimatedSprite2D)_sprite.GetChild(0).GetChild(0);
+        //_bullet = (Node2D)_sprite.GetChild(1);
 
         base._Ready();
     }
@@ -101,7 +104,7 @@ public partial class Player : CharacterBody2D
         Velocity = vector;
 
 
-        //ChangeAnimation();
+        ChangeAnimation();
 
         MoveAndSlide();
 
@@ -124,6 +127,41 @@ public partial class Player : CharacterBody2D
 
 
 
+        //    switch (true)
+        //    {
+        //        case true when VelocityY > 0:
+
+        //            //if (_sprite.Animation == "Fall" || _sprite.Animation == "Falling")
+        //            //{
+        //            //    if(_sprite.Frame == _sprite.SpriteFrames.GetFrameCount("Fall"))
+        //            //        _sprite.Play("Falling");
+        //            //    break;
+        //            //}
+
+        //            //_sprite.Play("Falling");
+
+        //            if (VelocityX > 0)
+        //                _sprite.FlipH = false;
+        //            else if (VelocityX < 0)
+        //                _sprite.FlipH = true;
+        //            break;
+
+        //        case true when (VelocityX > 0 && VelocityY == 0):
+        //            _sprite.Play("Run");
+        //            _sprite.FlipH = false;
+        //            break;
+
+        //        case true when (VelocityX < 0 && VelocityY == 0):
+        //            _sprite.Play("Run");
+        //            _sprite.FlipH = true;
+        //            break;
+
+        //        default:
+        //            _sprite.Play("Idle");
+        //            break;
+        //    }
+
+        //}
         switch (true)
         {
             case true when VelocityY > 0:
@@ -135,30 +173,62 @@ public partial class Player : CharacterBody2D
                 //    break;
                 //}
 
-                //_sprite.Play("Falling");
+
 
                 if (VelocityX > 0)
+                {
                     _sprite.FlipH = false;
+                    if (_weapon.FlipH)
+                    {
+                        _weapon.FlipH = false;
+                        _weapon.Position = new Vector2(_weapon.Position.X + 4, _weapon.Position.Y);
+                        //_bullet.Position = new Vector2(11, _bullet.Position.Y);
+                    }
+
+                }
                 else if (VelocityX < 0)
+                {
                     _sprite.FlipH = true;
+                    if (!_weapon.FlipH)
+                    {
+                        _weapon.FlipH = true;
+                        _weapon.Position = new Vector2(_weapon.Position.X - 4, _weapon.Position.Y);
+                        //_bullet.Position = new Vector2(-11, _bullet.Position.Y);
+                    }
+                    _weapon.FlipH = true;
+                }
                 break;
 
             case true when (VelocityX > 0 && VelocityY == 0):
-                //_sprite.Play("Walk");
+                _sprite.Play("Run");
                 _sprite.FlipH = false;
+                if (_weapon.FlipH)
+                {
+                    _weapon.FlipH = false;
+                    _weapon.Position = new Vector2(_weapon.Position.X + 50, _weapon.Position.Y);
+                    //_bullet.Position = new Vector2(11, _bullet.Position.Y);
+                }
                 break;
 
             case true when (VelocityX < 0 && VelocityY == 0):
-                //_sprite.Play("Walk");
+                _sprite.Play("Run");
                 _sprite.FlipH = true;
+                if (!_weapon.FlipH)
+                {
+                    _weapon.FlipH = true;
+                    _weapon.Position = new Vector2(_weapon.Position.X - 50, _weapon.Position.Y);
+                    //_bullet.Position = new Vector2(-11, _bullet.Position.Y);
+                }
+                _weapon.FlipH = true;
                 break;
 
             default:
-                //_sprite.Play("Idle");
+                _sprite.Play("Idle");
                 break;
         }
-
     }
 
 
 }
+
+

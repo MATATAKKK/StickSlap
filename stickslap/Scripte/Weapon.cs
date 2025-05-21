@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public abstract partial class Weapon : Node2D
+public abstract partial class Weapon : CharacterBody2D
 {
     [Export] public PackedScene bulletTcn;
     public float bulletSpeed = 600f;

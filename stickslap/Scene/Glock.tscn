@@ -59,7 +59,7 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="Glock" type="Node2D"]
+[node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_xoibi")
 bulletTcn = ExtResource("2_dd6o0")
 
@@ -67,5 +67,3 @@ bulletTcn = ExtResource("2_dd6o0")
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_qtac1")
 animation = &"Shoot"
-frame = 11
-frame_progress = 1.0

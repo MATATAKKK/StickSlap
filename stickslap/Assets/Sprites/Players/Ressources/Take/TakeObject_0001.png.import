@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bosrqlgudicq2"
-path="res://.godot/imported/arm_super_fighter.png-9e41ce7b8fef0aa1444f65fbdeddaa98.ctex"
+uid="uid://gnyuydumrt2r"
+path="res://.godot/imported/TakeObject_0001.png-09230ce8e049988eef3dbe0352d9a73d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Players/Ressources/arm_super_fighter.png"
-dest_files=["res://.godot/imported/arm_super_fighter.png-9e41ce7b8fef0aa1444f65fbdeddaa98.ctex"]
+source_file="res://Assets/Sprites/Players/Ressources/Take/TakeObject_0001.png"
+dest_files=["res://.godot/imported/TakeObject_0001.png-09230ce8e049988eef3dbe0352d9a73d.ctex"]
 
 [params]
 
