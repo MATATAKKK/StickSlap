@@ -126,12 +126,15 @@ scale = Vector2(0.2, 0.266)
 sprite_frames = SubResource("SpriteFrames_y8w33")
 animation = &"Idle"
 
-[node name="Glock" parent="AnimatedSprite2D" instance=ExtResource("3_xa75v")]
-position = Vector2(155.75, -8.68047)
-scale = Vector2(5, 3.7594)
-
 [node name="PunchTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="handWeapon" type="Node2D" parent="."]
+position = Vector2(16, -3)
+
+[node name="Glock" parent="handWeapon" instance=ExtResource("3_xa75v")]
+position = Vector2(8, -2)
+scale = Vector2(1, 1)
 
 [connection signal="timeout" from="PunchTimer" to="." method="_on_punch_timer_timeout"]

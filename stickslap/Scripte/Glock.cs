@@ -23,16 +23,24 @@ public partial class Glock : Weapon
             RigidBody2D bullet = bulletTcn.Instantiate<RigidBody2D>();
 
 
-            AnimatedSprite2D parent = (AnimatedSprite2D)GetParent();
+            Node2D parent = (Node2D)GetParent();
+
+            CharacterBody2D parentParent = (CharacterBody2D)parent.GetParent();
+
+            AnimatedSprite2D parentAnimatedSprite2D = (AnimatedSprite2D)parentParent.GetChild(1);
+
+
+
+
             
 
-            if (parent.FlipH)
+            if (parentAnimatedSprite2D.FlipH)
             {
                 bullet.LinearVelocity = bullet.Transform.X * - bulletSpeed;
 
                 bullet.GlobalPosition = GlobalPosition - _Size;
             }
-            else if (!parent.FlipH)
+            else if (!parentAnimatedSprite2D.FlipH)
             {
                 bullet.LinearVelocity = bullet.Transform.X * bulletSpeed;
 

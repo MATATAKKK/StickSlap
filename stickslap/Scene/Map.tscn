@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://d3ssq2446xfjb"]
+[gd_scene load_steps=29 format=4 uid="uid://bn0toc7sgujrw"]
 
 [ext_resource type="Texture2D" uid="uid://ce8fknn27452q" path="res://Assets/Sprites/Map/tiles.png" id="1_6r3tm"]
 [ext_resource type="PackedScene" uid="uid://c3ukokkyj03hs" path="res://Scene/player.tscn" id="1_6wl1v"]

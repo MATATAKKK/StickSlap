@@ -37,12 +37,21 @@ public partial class Player : CharacterBody2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        
+
+        GD.Print(this.GetChildren());
         _sprite = (AnimatedSprite2D)GetChild(1);
+ 
         _currentJumpforce = _jumpforce;
-        _weapon = (AnimatedSprite2D)_sprite.GetChild(0).GetChild(0);
+
+
+
+        GD.Print(GetChild(3).GetChildren());
+
+        _weapon = (AnimatedSprite2D)GetChild(3).GetChild(0).GetChild(0);
         //_bullet = (Node2D)_sprite.GetChild(1);
 
-        _sprite = (AnimatedSprite2D)GetChild(1);
+        //_sprite = (AnimatedSprite2D)GetChild(1);
         _punchTimer = GetNode<Timer>("PunchTimer");
 
         _punchTimer.Timeout += OnPunchTimerTimeout;
@@ -59,6 +68,7 @@ public partial class Player : CharacterBody2D
     public Vector2 GetInput()
     {
         return Input.GetVector("left", "right", "jump", "down");
+        
     }
 
 
