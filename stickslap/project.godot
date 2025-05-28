@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="StickSlap"
+run/main_scene="uid://duj1wq3pj7qd1"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 
 [dotnet]
@@ -25,8 +26,7 @@ enabled=PackedStringArray("res://addons/sprite_cutter/plugin.cfg")
 
 folder_colors={
 "res://Assets/": "blue",
-"res://Scene/": "purple",
-"res://Scenes/": "purple"
+"res://Scene/": "purple"
 }
 
 [input]

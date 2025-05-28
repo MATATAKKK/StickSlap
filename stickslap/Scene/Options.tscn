@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://cqt5obgkmi7w7"]
+[gd_scene load_steps=3 format=3 uid="uid://cqt5obgkmi7w7"]
+
+[ext_resource type="Script" uid="uid://b83ukksyhnkww" path="res://Scene/ChbFullscreen.cs" id="1_j5knc"]
+[ext_resource type="Script" uid="uid://py23jysddlsa" path="res://Scene/BtnBack.cs" id="2_74hho"]
 
 [node name="Options" type="Control"]
 layout_mode = 3
@@ -8,10 +11,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Container" type="Container" parent="."]
+layout_mode = 0
+offset_left = 397.0
+offset_top = 166.0
+offset_right = 673.0
+offset_bottom = 218.0
+
+[node name="lblFullscreen" type="Label" parent="Container"]
+layout_mode = 2
+text = "Fullscreen"
+
+[node name="chbFullscreen" type="CheckButton" parent="Container"]
+z_as_relative = false
+layout_mode = 2
+size_flags_horizontal = 8
+script = ExtResource("1_j5knc")
+
+[node name="btnBack" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.5
+offset_top = -47.0
+offset_right = 139.5
+offset_bottom = 47.0
 grow_horizontal = 2
 grow_vertical = 2
+text = "Quit
+"
+script = ExtResource("2_74hho")
