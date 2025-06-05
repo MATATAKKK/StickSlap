@@ -12,7 +12,7 @@ public partial class Player : CharacterBody2D
 
     private Timer _punchTimer;
 
-    [Export] public Node2D Arm;
+    public Node2D Arm;
     [Export] public float ArmLength = 20f;
 
 
@@ -44,7 +44,7 @@ public partial class Player : CharacterBody2D
  
         _currentJumpforce = _jumpforce;
 
-
+        Arm = (Node2D)GetChild(3).GetChild(0);
 
         GD.Print(GetChild(3).GetChildren());
 
@@ -201,69 +201,51 @@ public partial class Player : CharacterBody2D
         //            break;
         //    }
 
-        //}
+
+
         switch (true)
         {
             case true when VelocityY > 0:
-
-                //if (_sprite.Animation == "Fall" || _sprite.Animation == "Falling")
-                //{
-                //    if(_sprite.Frame == _sprite.SpriteFrames.GetFrameCount("Fall"))
-                //        _sprite.Play("Falling");
-                //    break;
-                //}
-
-
+                // _sprite.Play("Falling"); // à activer si t'as l'anim
 
                 if (VelocityX > 0)
                 {
                     _sprite.FlipH = false;
-                    if (_weapon.FlipH)
-                    {
-                        _weapon.FlipH = false;
-                        _weapon.Position = new Vector2(_weapon.Position.X + 4, _weapon.Position.Y);
-                        //_bullet.Position = new Vector2(11, _bullet.Position.Y);
-                    }
-
+                    Arm.Scale = new Vector2(1, 1); // vers la droite
                 }
                 else if (VelocityX < 0)
                 {
                     _sprite.FlipH = true;
-                    if (!_weapon.FlipH)
-                    {
-                        _weapon.FlipH = true;
-                        _weapon.Position = new Vector2(_weapon.Position.X - 4, _weapon.Position.Y);
-                        //_bullet.Position = new Vector2(-11, _bullet.Position.Y);
-                    }
-                    _weapon.FlipH = true;
+                    Arm.Scale = new Vector2(-1, 1); // vers la gauche (miroir horizontal)
                 }
                 break;
 
             case true when (VelocityX > 0 && VelocityY == 0):
                 _sprite.Play("Run");
                 _sprite.FlipH = false;
-                if (_weapon.FlipH)
-                {
-                    _weapon.FlipH = false;
-                    _weapon.Position = new Vector2(_weapon.Position.X + 50, _weapon.Position.Y);
-                    //_bullet.Position = new Vector2(11, _bullet.Position.Y);
-                }
+                Arm.Scale = new Vector2(1, 1); // vers la droite
                 break;
 
             case true when (VelocityX < 0 && VelocityY == 0):
                 _sprite.Play("Run");
                 _sprite.FlipH = true;
-                if (!_weapon.FlipH)
-                {
-                    _weapon.FlipH = true;
-                    _weapon.Position = new Vector2(_weapon.Position.X - 50, _weapon.Position.Y);
-                    //_bullet.Position = new Vector2(-11, _bullet.Position.Y);
-                }
-                _weapon.FlipH = true;
+                Arm.Scale = new Vector2(-1, 1); // vers la gauche
                 break;
+
 
             default:
                 _sprite.Play("Idle");
+
+                //if (_sprite.FlipH)
+                //{
+                //    _weapon.FlipH = true;
+                //    _weapon.Position = -weaponBaseOffset;
+                //}
+                //else
+                //{
+                //    _weapon.FlipH = false;
+                //    _weapon.Position = weaponBaseOffset;
+                //}
                 break;
         }
     }

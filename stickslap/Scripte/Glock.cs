@@ -18,10 +18,6 @@ public partial class Glock : Weapon
     public override void _Process(double delta)
     {
         //base._Process(delta);
-        if (Input.IsActionJustPressed("leftClick") && timeUntilFire > fireRate)
-        {
-            RigidBody2D bullet = bulletTcn.Instantiate<RigidBody2D>();
-
 
             Node2D parent = (Node2D)GetParent();
 
@@ -29,14 +25,24 @@ public partial class Glock : Weapon
 
             AnimatedSprite2D parentAnimatedSprite2D = (AnimatedSprite2D)parentParent.GetChild(1);
 
+        if (parentAnimatedSprite2D.FlipH) 
+        {
+            GlobalPosition = parent.GlobalPosition;
+        }
+        
+        if (Input.IsActionJustPressed("leftClick") && timeUntilFire > fireRate)
+        {
+            RigidBody2D bullet = bulletTcn.Instantiate<RigidBody2D>();
 
 
 
-            
+
+            _Sprite.Play("Shoot");
+
 
             if (parentAnimatedSprite2D.FlipH)
             {
-                bullet.LinearVelocity = bullet.Transform.X * - bulletSpeed;
+                bullet.LinearVelocity = bullet.Transform.X * -bulletSpeed;
 
                 bullet.GlobalPosition = GlobalPosition - _Size;
             }
@@ -48,6 +54,7 @@ public partial class Glock : Weapon
             }
 
 
+
             GetTree().Root.AddChild(bullet);
 
             timeUntilFire = 0f;
@@ -57,5 +64,6 @@ public partial class Glock : Weapon
             timeUntilFire += (float)delta;
         }
 
+        
     }
 }
